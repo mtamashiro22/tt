@@ -13,11 +13,22 @@ tivs = key:
 
 */
 
-
 function checkAll(){
-  tivs = {}
   getPage(int2Html(1),function(err,response){
-    console.log(checkPage(response));
+    var numPages = getLastPage(response);
+    for (var i=1;i<4;i++){
+      (function(num){
+        setTimeout(function () {
+          getPage(int2Html(num),function(err,result){
+            console.log(num);
+            updateList(checkPage(result));
+            if (num==3){
+              console.log(organizeList(getList()));
+            }
+          })
+        }, num*1000);
+      }(i));
+    }
   });
 }
 
@@ -54,7 +65,12 @@ function checkPage(response){
             }
           }
         }
-        var tiv = gamesDiv[j].getElementsByClassName(TIV_DIV)[0].innerText.trim();
+        try{
+          var tiv = gamesDiv[j].getElementsByClassName(TIV_DIV)[0].innerText.trim();
+        }
+        catch(err){
+          tiv = 'N/A';
+        }
         indArr=[id,title,tiv];
         allPrices.push(indArr);
       }
@@ -84,4 +100,15 @@ function int2Html(i){
   tiStr_C = '&bbn=468642&ie=UTF8&qid=1454641315'
 
   return tiStr_A+i+tiStr_B+i+tiStr_C;
+}
+
+function organizeList(list){
+  tivs = {};
+  for(i in list){
+    tivs[list[i][0]]={};
+    tivs[list[i][0]]["key"]=list[i][0];
+    tivs[list[i][0]]["name"]=list[i][1];
+    tivs[list[i][0]]["tiv"]=list[i][2];
+  }
+  return tivs;
 }
