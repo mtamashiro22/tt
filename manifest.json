@@ -1,0 +1,33 @@
+{
+  "description": "TradeTracker monitors trade in prices from Amazon.",
+  "manifest_version": 2,
+  "name": "TradeTracker",
+  "permissions": [ "tabs",
+                    "http://www.amazon.com/",
+                    "https://www.amazon.com/",
+                    "chrome://favicon/",
+                    "storage",
+                    "identity",
+                    "unlimitedStorage",
+                    "notifications",
+                    "alarms" ],
+  "version": "0.9.0",
+  "browser_action":{
+	   "default_icon":"imgs/icon.png",
+     "default_title":"TradeTracker",
+     "default_popup":"popup.htm"
+  },
+
+  "icons": {
+    "16":"imgs/icon16.png",
+    "48":"imgs/icon48.png",
+    "128":"imgs/icon128.png"
+  },
+
+  "background": {
+    "page": "background.htm",
+	  "persistent": true
+  },
+
+  "options_page":"options.htm"
+}
