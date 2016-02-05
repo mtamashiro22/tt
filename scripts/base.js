@@ -55,6 +55,11 @@ function checkPage(response){
       var allPrices = []
       for (j=0;j<gamesDiv.length;j++){
         var indArr = []
+
+        //var link = gamesDiv[j].getElementsByClassName('a-link-normal s-access-detail-page  a-text-normal')[0];
+        //console.log(link.getAttribute('href'));
+
+
         var title = gamesDiv[j].getElementsByClassName(TITLE_DIV)[0].innerText.trim();
         var ids = gamesDiv[j].getElementsByClassName(ID_DIV);
 
